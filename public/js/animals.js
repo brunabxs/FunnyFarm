@@ -24,6 +24,13 @@ Animals.appendToDOM = function(animal) {
   jQuery('#game-background').append(Animals.domElement(animal));
 };
 
+Animals.createSprite = function(animal) {
+  jQuery(Animals.cssSelector(animal)).sprite({
+    fps: animal.fps,
+    no_of_frames: animal.frames
+  });
+};
+
 Animals.hen = function(x, y) {
   var self = this;
 
@@ -32,4 +39,6 @@ Animals.hen = function(x, y) {
   self.class = 'game-animal game-hen';
   self.position = {'x': x, 'y': y};
   self.size = {'width': '32px', 'height': '32px'};
+  self.fps = 10;
+  self.frames = 4;
 };

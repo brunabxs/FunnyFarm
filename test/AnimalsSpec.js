@@ -17,6 +17,8 @@ describe('hen object initialization', function() {
     expect(hen.class).toBe('game-animal game-hen');
     expect(hen.position).toEqual({'x': x, 'y': y});
     expect(hen.size).toEqual({'width': '32px', 'height': '32px'});
+    expect(hen.fps).toEqual(10);
+    expect(hen.frames).toEqual(4);
   });
 
   it('must increment Animals.count', function() {
@@ -83,6 +85,18 @@ describe('appendToDOM function', function() {
     Animals.count = 0;
   });
 
+  it('must be called over #game-background element', function() {
+    // Arrange
+    var spy = spyOn($.fn, 'append');
+    var hen = new Animals.hen(14, 15);
+
+    // Act
+    Animals.appendToDOM(hen);
+
+    // Assert
+    expect(spy.calls.mostRecent().object.selector).toEqual('#game-background');
+  });
+  
   it('must be called with domElement function\'s result', function() {
     // Arrange
     var spy = spyOn($.fn, 'append');
@@ -93,5 +107,35 @@ describe('appendToDOM function', function() {
 
     // Assert
     expect(spy).toHaveBeenCalledWith('<div id="game-hen-1" class="game-animal game-hen" style="position:absolute;width:32px;height:32px;top:15;left:14;"></div>');
+  });
+});
+
+describe('createSprite function', function() {
+  beforeEach(function() {
+    Animals.count = 0;
+  });
+  
+  it('must be called over cssSelector function\'s result', function() {
+    // Arrange
+    var spy = spyOn($.fn, 'sprite');
+    var hen = new Animals.hen(14, 15);
+
+    // Act
+    Animals.createSprite(hen);
+
+    // Assert
+    expect(spy.calls.mostRecent().object.selector).toEqual('#game-hen-1');
+  });
+
+  it('must be called with animal\'s instance\'s fps and frames atributes', function() {
+    // Arrange
+    var spy = spyOn($.fn, 'sprite');
+    var hen = new Animals.hen(14, 15);
+
+    // Act
+    Animals.createSprite(hen);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith({ fps: 10, no_of_frames: 4 });
   });
 });
