@@ -1,0 +1,23 @@
+{
+  "name": "FunnyFarm",
+  "version": "0.1.0",
+  "description": "HTML5 farm game",
+  "author": "Bruna Xavier <brunabxsantos@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brunabxs/FunnyFarm.git"
+  },
+  "licenses": [
+    {
+      "type": "GPLv2",
+      "url": "http://www.example.com/licenses/gpl.html"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "~0.10.0"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
+}
