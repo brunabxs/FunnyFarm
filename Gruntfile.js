@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     },
     jasmine : {
       components : {
-        src : 'public/js/Animals.js',
+        src : 'public/js/animals.js',
         options : {
           specs : 'test/*Spec.js',
           vendor : 'public/js/lib/*.js',
