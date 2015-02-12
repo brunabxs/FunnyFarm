@@ -24,11 +24,26 @@ Animals.appendToDOM = function(animal) {
   jQuery('#game-background').append(Animals.domElement(animal));
 };
 
+Animals.walk = function(animal) {
+  return undefined;
+};
+
+Animals.walkSpeed = function(animal) {
+  return undefined;
+};
+
 Animals.createSprite = function(animal) {
   jQuery(Animals.cssSelector(animal)).sprite({
     fps: animal.fps,
     no_of_frames: animal.frames
   });
+
+  self.interval = setInterval(function(){ Animals.walk(animal); }, Animals.walkSpeed(animal));
+};
+
+Animals.destroySprite = function(animal) {
+  jQuery(Animals.cssSelector(animal)).destroy();
+  clearInterval(animal.interval);
 };
 
 Animals.hen = function(x, y) {
@@ -41,4 +56,5 @@ Animals.hen = function(x, y) {
   self.size = {'width': '32px', 'height': '32px'};
   self.fps = 10;
   self.frames = 4;
+  self.interval = undefined;
 };
