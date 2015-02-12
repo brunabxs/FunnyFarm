@@ -5,19 +5,11 @@ Animals.cssSelector = function(animal) {
 };
 
 Animals.style = function(size, position) {
-  return 'position:absolute;'
-       + 'width:' + size.width + ';'
-       + 'height:' + size.height + ';'
-       + 'top:' + position.y + ';'
-       + 'left:' + position.x + ';';
+  return 'position:absolute;width:' + size.width + ';height:' + size.height + ';top:' + position.y + ';left:' + position.x + ';';
 };
 
 Animals.domElement = function(animal) {
-  return '<div'
-       + ' id="' + animal.id + '"'
-       + ' class="' + animal.class + '"'
-       + ' style="' + Animals.style(animal.size, animal.position) + '"'
-       + '></div>';
+  return '<div id="' + animal.id + '" class="' + animal.class + '" style="' + Animals.style(animal.size, animal.position) + '"></div>';
 };
 
 Animals.appendToDOM = function(animal) {
