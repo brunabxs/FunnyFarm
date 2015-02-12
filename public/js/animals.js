@@ -33,6 +33,8 @@ Animals.walkSpeed = function(animal) {
 };
 
 Animals.createSprite = function(animal) {
+  Animals.appendToDOM(animal);
+
   jQuery(Animals.cssSelector(animal)).sprite({
     fps: animal.fps,
     no_of_frames: animal.frames

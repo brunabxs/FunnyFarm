@@ -190,6 +190,18 @@ describe('createSprite function', function() {
     // Assert
     expect(self.interval).not.toEqual(undefined);
   });
+  
+  it('must call appendToDOM function with animal\'s instance', function() {
+    // Arrange
+    var hen = new Animals.hen(14, 15);
+    spyOn(Animals, 'appendToDOM');
+
+    // Act
+    Animals.createSprite(hen);
+    
+    // Assert
+    expect(Animals.appendToDOM).toHaveBeenCalledWith(hen);
+  });
 });
 
 describe('destroySprite function', function() {
