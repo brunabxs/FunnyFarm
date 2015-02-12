@@ -96,7 +96,7 @@ describe('appendToDOM function', function() {
     // Assert
     expect(spy.calls.mostRecent().object.selector).toEqual('#game-background');
   });
-  
+
   it('must be called with domElement function\'s result', function() {
     // Arrange
     var spy = spyOn($.fn, 'append');
@@ -119,7 +119,7 @@ describe('createSprite function', function() {
   afterEach(function() {
     jasmine.clock().uninstall();
   });
-  
+
   it('must be called over cssSelector function\'s result', function() {
     // Arrange
     var spy = spyOn($.fn, 'sprite');
@@ -152,11 +152,11 @@ describe('createSprite function', function() {
 
     // Act
     Animals.createSprite(hen);
-    
+
     // Assert
     expect(Animals.walkSpeed).toHaveBeenCalledWith(hen);
   });
-  
+
   it('must call walk function after each walkSpeed function\'s result', function() {
     // Arrange
     var hen = new Animals.hen(14, 15);
@@ -165,16 +165,16 @@ describe('createSprite function', function() {
 
     // Act
     Animals.createSprite(hen);
-    
+
     // Assert
     expect(Animals.walk).not.toHaveBeenCalled();
-    
+
     jasmine.clock().tick(1001);
     expect(Animals.walk).toHaveBeenCalled();
-    
+
     jasmine.clock().tick(500);
     expect(Animals.walk.calls.count()).toBe(1);
-    
+
     jasmine.clock().tick(500);
     expect(Animals.walk.calls.count()).toBe(2);
   });
@@ -190,7 +190,7 @@ describe('createSprite function', function() {
     // Assert
     expect(self.interval).not.toEqual(undefined);
   });
-  
+
   it('must call appendToDOM function with animal\'s instance', function() {
     // Arrange
     var hen = new Animals.hen(14, 15);
@@ -198,7 +198,7 @@ describe('createSprite function', function() {
 
     // Act
     Animals.createSprite(hen);
-    
+
     // Assert
     expect(Animals.appendToDOM).toHaveBeenCalledWith(hen);
   });
@@ -208,7 +208,7 @@ describe('destroySprite function', function() {
   beforeEach(function() {
     Animals.count = 0;
   });
-  
+
   it('must be called over cssSelector function\'s result', function() {
     // Arrange
     var spy = spyOn($.fn, 'destroy');
@@ -220,7 +220,7 @@ describe('destroySprite function', function() {
     // Assert
     expect(spy.calls.mostRecent().object.selector).toEqual('#game-hen-1');
   });
-  
+
   it('must unset animal\'s instance\'s interval attribute', function() {
     // Arrange
     var hen = new Animals.hen(14, 15);
@@ -228,7 +228,7 @@ describe('destroySprite function', function() {
 
     // Act
     Animals.destroySprite(hen);
-    
+
     // Assert
     expect(hen.interval).toEqual(undefined);
   });
