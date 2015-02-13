@@ -40,11 +40,11 @@ Floors.applyFence = function(floor, floorsAtTop, floorsAtRight, floorsAtBottom, 
   jQuery(selector).addClass('right');
   jQuery(selector).addClass('bottom');
   jQuery(selector).addClass('left');
-  if (floorsAtTop === 1)    jQuery(selector).removeClass('top');
-  if (floorsAtRight === 1)  jQuery(selector).removeClass('right');
+  if (floorsAtTop === 1) jQuery(selector).removeClass('top');
+  if (floorsAtRight === 1) jQuery(selector).removeClass('right');
   if (floorsAtBottom === 1) jQuery(selector).removeClass('bottom');
-  if (floorsAtLeft === 1)   jQuery(selector).removeClass('left');
-}
+  if (floorsAtLeft === 1) jQuery(selector).removeClass('left');
+};
 
 Floors.floor = function(x, y) {
   var self = this;
