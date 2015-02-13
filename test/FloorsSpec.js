@@ -344,3 +344,38 @@ describe('applyFence function', function() {
     expect(spyJQueryRemoveClassFunction.calls.mostRecent().args[0]).toEqual('left');
   });  
 });
+
+describe('containsCoord function', function() {
+  it('must return true if (x,y) coord parameter is inside floor', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+
+    // Act
+    var result = Floors.containsCoord(floor, 127, 127);
+
+    // Assert
+    expect(result).toBe(true);
+  });
+  
+  it('must return true if (x,y) coord parameter is over floor limits', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+
+    // Act
+    var result = Floors.containsCoord(floor, 64, 64);
+
+    // Assert
+    expect(result).toBe(true);
+  });
+
+  it('must return false if (x,y) coord parameter is not inside floor', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+
+    // Act
+    var result = Floors.containsCoord(floor, 64, 32);
+
+    // Assert
+    expect(result).toBe(false);
+  });
+});

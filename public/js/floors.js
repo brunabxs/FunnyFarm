@@ -46,6 +46,18 @@ Floors.applyFence = function(floor, floorsAtTop, floorsAtRight, floorsAtBottom, 
   if (floorsAtLeft === 1) jQuery(selector).removeClass('left');
 };
 
+Floors.containsCoord = function(floor, x, y) {
+  var widthFloor = parseInt(floor.size.width, 10);
+  var heightFloor = parseInt(floor.size.height, 10);
+  
+  if (floor.position.y <= y && y <= floor.position.y + heightFloor) {
+    if (floor.position.x <= x && x <= floor.position.x + widthFloor) {
+      return true;
+    }
+  }
+  return false;
+};
+
 Floors.floor = function(x, y) {
   var self = this;
 
