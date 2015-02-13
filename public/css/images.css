@@ -1,0 +1,21 @@
+.game-hen { background-image: url('../img/hen.png'); }
+
+.game-floor { background-image: url('../img/floor/floor.png'); }
+.game-floor.bottom { background-image: url('../img/floor/floor-b.png'); }
+.game-floor.left { background-image: url('../img/floor/floor-l.png'); }
+.game-floor.top { background-image: url('../img/floor/floor-t.png'); }
+.game-floor.right { background-image: url('../img/floor/floor-r.png'); }
+
+.game-floor.left.bottom { background-image: url('../img/floor/floor-lb.png'); }
+.game-floor.left.top { background-image: url('../img/floor/floor-lt.png'); }
+.game-floor.left.right { background-image: url('../img/floor/floor-lr.png'); }
+.game-floor.right.bottom { background-image: url('../img/floor/floor-rb.png'); }
+.game-floor.right.top { background-image: url('../img/floor/floor-rt.png'); }
+.game-floor.top.bottom { background-image: url('../img/floor/floor-tb.png'); }
+
+.game-floor.left.right.top { background-image: url('../img/floor/floor-lrt.png'); }
+.game-floor.left.right.bottom { background-image: url('../img/floor/floor-lrb.png'); }
+.game-floor.left.top.bottom { background-image: url('../img/floor/floor-ltb.png'); }
+.game-floor.right.top.bottom { background-image: url('../img/floor/floor-rtb.png'); }
+
+.game-floor.left.right.top.bottom { background-image: url('../img/floor/floor-lrtb.png'); }
