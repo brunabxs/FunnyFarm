@@ -190,7 +190,7 @@ describe('createSprite function', function() {
 
     // Act
     Animals.createSprite(hen);
-    
+
     // Assert
     expect(self.interval).not.toEqual(undefined);
   });
@@ -256,7 +256,7 @@ describe('newPosition function', function() {
     // Assert
     expect(position).toEqual({x: x, y: y-step});
   });
-  
+
   it('must return y incremented by step if direction is down', function() {
     // Arrange
     var x = 10;
@@ -284,7 +284,7 @@ describe('newPosition function', function() {
     // Assert
     expect(position).toEqual({x: x-step, y: y});
   });
-  
+
   it('must return x incremented by step if direction is right', function() {
     // Arrange
     var x = 10;
@@ -370,7 +370,7 @@ describe('walk function', function() {
 
     // Assert
     expect(Animals.newDir).toHaveBeenCalled();
-  });  
+  });
 });
 
 describe('walkSpeed function', function() {

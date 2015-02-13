@@ -21,7 +21,7 @@ Animals.newPosition = function(x, y, direction, step) {
   if (direction === 'left') x = x - step;
   if (direction === 'right') x = x + step;
   if (direction === 'down') y = y + step;
-  
+
   return {x: x, y: y};
 };
 
@@ -35,19 +35,19 @@ Animals.walk = function(animal) {
   var sprite = jQuery(Animals.cssSelector(animal)).spState(animal.direction);
 
   var top = parseInt(sprite.css('top'), 10) || 0;
-  var left = parseInt(sprite.css('left'), 10) || 0;  
+  var left = parseInt(sprite.css('left'), 10) || 0;
   var position = Animals.newPosition(left, top, animal.directions[animal.direction], animal.walkStep);
 
   // change direction randomly with prob 0.05
   if (Math.random() < 0.05) {
     Animals.newDir(animal);
   }
-  
+
   animal.position.y = position.y;
   sprite.css('top', position.y + 'px');
   
   animal.position.x = position.x;
-  sprite.css('left', position.x + 'px');  
+  sprite.css('left', position.x + 'px');
 };
 
 Animals.walkSpeed = function(animal) {
