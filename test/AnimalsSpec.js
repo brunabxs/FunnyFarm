@@ -203,7 +203,7 @@ describe('createSprite function', function() {
     Animals.createSprite(hen);
 
     // Assert
-    expect(self.interval).not.toEqual(undefined);
+    expect(hen.interval).not.toEqual(undefined);
   });
 
   it('must call appendToDOM function with animal\'s instance', function() {
