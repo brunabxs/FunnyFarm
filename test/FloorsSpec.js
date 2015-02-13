@@ -259,3 +259,88 @@ describe('isAdjacentBottomFloor function', function() {
     expect(result).toBe(false);
   });
 });
+
+describe('applyFence function', function() {
+  it('must apply top, right, bottom and left classes to DOM element if there is no other floor around', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+    var spyJQueryAddClassFunction = spyOn($.fn, 'addClass');
+    var spyJQueryRemoveClassFunction = spyOn($.fn, 'removeClass');
+
+    // Act
+    Floors.applyFence(floor, 0, 0, 0, 0);
+
+    // Assert
+    expect(spyJQueryAddClassFunction).toHaveBeenCalled();
+    expect(spyJQueryAddClassFunction.calls.count()).toEqual(4);
+    expect(spyJQueryRemoveClassFunction).not.toHaveBeenCalled();
+  });
+
+  it('must not apply top class to DOM element if there is one floor over it', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+    var spyJQueryAddClassFunction = spyOn($.fn, 'addClass');
+    var spyJQueryRemoveClassFunction = spyOn($.fn, 'removeClass');
+
+    // Act
+    Floors.applyFence(floor, 1, 0, 0, 0);
+
+    // Assert
+    expect(spyJQueryAddClassFunction).toHaveBeenCalled();
+    expect(spyJQueryAddClassFunction.calls.count()).toEqual(4);
+    expect(spyJQueryRemoveClassFunction).toHaveBeenCalled();
+    expect(spyJQueryRemoveClassFunction.calls.count()).toEqual(1);
+    expect(spyJQueryRemoveClassFunction.calls.mostRecent().args[0]).toEqual('top');
+  });
+
+  it('must not apply right class to DOM element if there is one floor on its right side', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+    var spyJQueryAddClassFunction = spyOn($.fn, 'addClass');
+    var spyJQueryRemoveClassFunction = spyOn($.fn, 'removeClass');
+
+    // Act
+    Floors.applyFence(floor, 0, 1, 0, 0);
+
+    // Assert
+    expect(spyJQueryAddClassFunction).toHaveBeenCalled();
+    expect(spyJQueryAddClassFunction.calls.count()).toEqual(4);
+    expect(spyJQueryRemoveClassFunction).toHaveBeenCalled();
+    expect(spyJQueryRemoveClassFunction.calls.count()).toEqual(1);
+    expect(spyJQueryRemoveClassFunction.calls.mostRecent().args[0]).toEqual('right');
+  });
+
+  it('must not apply bottom class to DOM element if there is one floor under it', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+    var spyJQueryAddClassFunction = spyOn($.fn, 'addClass');
+    var spyJQueryRemoveClassFunction = spyOn($.fn, 'removeClass');
+
+    // Act
+    Floors.applyFence(floor, 0, 0, 1, 0);
+
+    // Assert
+    expect(spyJQueryAddClassFunction).toHaveBeenCalled();
+    expect(spyJQueryAddClassFunction.calls.count()).toEqual(4);
+    expect(spyJQueryRemoveClassFunction).toHaveBeenCalled();
+    expect(spyJQueryRemoveClassFunction.calls.count()).toEqual(1);
+    expect(spyJQueryRemoveClassFunction.calls.mostRecent().args[0]).toEqual('bottom');
+  });
+
+  it('must not apply left class to DOM element if there is one floor on its left side', function() {
+    // Arrange
+    var floor = new Floors.floor(64, 64);
+    var spyJQueryAddClassFunction = spyOn($.fn, 'addClass');
+    var spyJQueryRemoveClassFunction = spyOn($.fn, 'removeClass');
+
+    // Act
+    Floors.applyFence(floor, 0, 0, 0, 1);
+
+    // Assert
+    expect(spyJQueryAddClassFunction).toHaveBeenCalled();
+    expect(spyJQueryAddClassFunction.calls.count()).toEqual(4);
+    expect(spyJQueryRemoveClassFunction).toHaveBeenCalled();
+    expect(spyJQueryRemoveClassFunction.calls.count()).toEqual(1);
+    expect(spyJQueryRemoveClassFunction.calls.mostRecent().args[0]).toEqual('left');
+  });  
+});

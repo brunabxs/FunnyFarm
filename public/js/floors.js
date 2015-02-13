@@ -34,6 +34,18 @@ Floors.isAdjacentBottomFloor = function(floor1, floor2) {
   return floor1.position.y + parseInt(floor1.size.height, 10) === floor2.position.y && floor1.position.x === floor2.position.x;
 };
 
+Floors.applyFence = function(floor, floorsAtTop, floorsAtRight, floorsAtBottom, floorsAtLeft) {
+  var selector = Floors.cssSelector(floor);
+  jQuery(selector).addClass('top');
+  jQuery(selector).addClass('right');
+  jQuery(selector).addClass('bottom');
+  jQuery(selector).addClass('left');
+  if (floorsAtTop === 1)    jQuery(selector).removeClass('top');
+  if (floorsAtRight === 1)  jQuery(selector).removeClass('right');
+  if (floorsAtBottom === 1) jQuery(selector).removeClass('bottom');
+  if (floorsAtLeft === 1)   jQuery(selector).removeClass('left');
+}
+
 Floors.floor = function(x, y) {
   var self = this;
 
