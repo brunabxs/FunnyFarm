@@ -16,12 +16,42 @@ Animals.appendToDOM = function(animal) {
   jQuery('#game-background').append(Animals.domElement(animal));
 };
 
+Animals.newPosition = function(x, y, direction, step) {
+  if (direction === 'up') y = y - step;
+  if (direction === 'left') x = x - step;
+  if (direction === 'right') x = x + step;
+  if (direction === 'down') y = y + step;
+  
+  return {x: x, y: y};
+};
+
+Animals.newDir = function(animal) {
+  var newDir = (Math.floor(Math.random() * 31) % 4) + 1;
+  while (newDir === animal.direction) newDir = (Math.floor(Math.random() * 31) % 4) + 1;
+  animal.direction = newDir;
+};
+
 Animals.walk = function(animal) {
-  return undefined;
+  var sprite = jQuery(Animals.cssSelector(animal)).spState(animal.direction);
+
+  var top = parseInt(sprite.css('top'), 10) || 0;
+  var left = parseInt(sprite.css('left'), 10) || 0;  
+  var position = Animals.newPosition(left, top, animal.directions[animal.direction], animal.walkStep);
+
+  // change direction randomly with prob 0.05
+  if (Math.random() < 0.05) {
+    Animals.newDir(animal);
+  }
+  
+  animal.position.y = position.y;
+  sprite.css('top', position.y + 'px');
+  
+  animal.position.x = position.x;
+  sprite.css('left', position.x + 'px');  
 };
 
 Animals.walkSpeed = function(animal) {
-  return undefined;
+  return 1000 * animal.walkSpeed / animal.fps;
 };
 
 Animals.createSprite = function(animal) {
@@ -51,4 +81,8 @@ Animals.hen = function(x, y) {
   self.fps = 10;
   self.frames = 4;
   self.interval = undefined;
+  self.walkSpeed = 1;
+  self.walkStep = 1;
+  self.direction = 4;
+  self.directions = { 4:'up', 3:'right', 1:'bottom', 2:'left' };
 };
