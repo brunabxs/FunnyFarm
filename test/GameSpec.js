@@ -155,6 +155,7 @@ describe('GameSpec', function() {
 
     it('must append to Game.animals a hen', function() {
       // Arrange
+      Animals.count = 0;
       var x = 0;
       var y = 0;
       var chickencoop = {};
