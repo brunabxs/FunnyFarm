@@ -42,6 +42,24 @@ Animals.walk = function(animal) {
   if (Math.random() < 0.05) {
     Animals.newDir(animal);
   }
+  
+  if (animal.building) {
+    var width = parseInt(animal.size.width, 10) || 0;
+    var height = parseInt(animal.size.height, 10) || 0;
+    
+    if (Buildings.allowMovement(animal.building, position.y, position.x, width, height)) {
+      animal.position.y = position.y;
+      sprite.css('top', position.y + 'px');
+      
+      animal.position.x = position.x;
+      sprite.css('left', position.x + 'px');
+      return;
+    }
+
+    // collision detected
+    Animals.newDir(animal);
+    return;
+  }
 
   animal.position.y = position.y;
   sprite.css('top', position.y + 'px');
@@ -70,7 +88,7 @@ Animals.destroySprite = function(animal) {
   clearInterval(animal.interval);
 };
 
-Animals.hen = function(x, y) {
+Animals.hen = function(x, y, building) {
   var self = this;
 
   self.index = ++Animals.count;
@@ -85,4 +103,5 @@ Animals.hen = function(x, y) {
   self.walkStep = 1;
   self.direction = 4;
   self.directions = { 4:'up', 3:'right', 1:'bottom', 2:'left' };
+  self.building = building;
 };

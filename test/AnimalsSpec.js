@@ -23,6 +23,17 @@ describe('hen object initialization', function() {
     expect(hen.walkSpeed).toEqual(1);
     expect(hen.direction).toEqual(4);
     expect(hen.directions).toEqual({ 4:'up', 3:'right', 1:'bottom', 2:'left' });
+    expect(hen.building).toBeUndefined();
+  });
+  
+  it('must set hen object building attribute if given', function() {
+    // Arrange
+
+    // Act
+    var hen = new Animals.hen(0, 0, {});
+
+    // Assert
+    expect(hen.building).toBeDefined();
   });
 
   it('must increment Animals.count', function() {
@@ -341,7 +352,7 @@ describe('walk function', function() {
     expect(Animals.newPosition).toHaveBeenCalledWith(14, 15, 'up', 1);
   });
 
-  it('must update animal\'s instance\'s position attribute', function() {
+  it('must update animal\'s instance\'s position attribute if animal\'s instance\'s building attribute is not defined', function() {
     // Arrange
     var hen = new Animals.hen(14, 15);
     spyOn(Animals, 'newPosition').and.returnValue({x: 13, y: 15});
@@ -359,6 +370,79 @@ describe('walk function', function() {
     expect(hen.position.y).toEqual(15);
   });
 
+  it('must update animal\'s instance\'s position attribute if animal\'s instance\'s building attribute is defined and movement is allowed', function() {
+    // Arrange
+    var chickencoop = new Buildings.chickencoop();
+    chickencoop.floors.push(new Floors.floor(0, 0));
+    chickencoop.floors.push(new Floors.floor(64, 0));
+    chickencoop.floors.push(new Floors.floor(0, 64));
+    chickencoop.floors.push(new Floors.floor(64, 64));
+
+    var hen = new Animals.hen(14, 15, chickencoop);
+    spyOn(Animals, 'newPosition').and.returnValue({x: 13, y: 15});
+    var spyJQueryCssFunction = spyOn($.fn, 'css').and.callFake(function(attribute) {
+      if (attribute === 'top') return hen.position.y + 'px';
+      if (attribute === 'left') return hen.position.x + 'px';
+      return null;
+    });
+
+    // Act
+    Animals.walk(hen);
+
+    // Assert
+    expect(hen.position.x).toEqual(13);
+    expect(hen.position.y).toEqual(15);
+  });
+  
+  it('must not update animal\'s instance\'s position attribute if animal\'s instance\'s building attribute is defined and movement is not allowed', function() {
+    // Arrange
+    var chickencoop = new Buildings.chickencoop();
+    chickencoop.floors.push(new Floors.floor(64, 64));
+    chickencoop.floors.push(new Floors.floor(128, 64));
+    chickencoop.floors.push(new Floors.floor(64, 128));
+    chickencoop.floors.push(new Floors.floor(128, 128));
+
+    var hen = new Animals.hen(14, 15, chickencoop);
+    spyOn(Animals, 'newPosition').and.returnValue({x: 13, y: 15});
+    var spyJQueryCssFunction = spyOn($.fn, 'css').and.callFake(function(attribute) {
+      if (attribute === 'top') return hen.position.y + 'px';
+      if (attribute === 'left') return hen.position.x + 'px';
+      return null;
+    });
+
+    // Act
+    Animals.walk(hen);
+
+    // Assert
+    expect(hen.position.x).toEqual(14);
+    expect(hen.position.y).toEqual(15);
+  });
+  
+  it('must update animal\'s instance\'s direction attribute if animal\'s instance\'s building attribute is defined and collision is detected', function() {
+    // Arrange
+    var chickencoop = new Buildings.chickencoop();
+    chickencoop.floors.push(new Floors.floor(0, 0));
+    chickencoop.floors.push(new Floors.floor(64, 0));
+    chickencoop.floors.push(new Floors.floor(0, 64));
+    chickencoop.floors.push(new Floors.floor(64, 64));
+
+    var hen = new Animals.hen(0, 0, chickencoop);
+    spyOn(Animals, 'newPosition').and.returnValue({x: -1, y: 0});
+    var spyJQueryCssFunction = spyOn($.fn, 'css').and.callFake(function(attribute) {
+      if (attribute === 'top') return hen.position.y + 'px';
+      if (attribute === 'left') return hen.position.x + 'px';
+      return null;
+    });
+
+    // Act
+    Animals.walk(hen);
+
+    // Assert
+    expect(hen.position.x).toEqual(0);
+    expect(hen.position.y).toEqual(0);
+    expect(hen.direction).not.toEqual(4);
+  });
+  
   it('must change animal\'s instance\'s direction attribute if Math.random() < 0.05', function() {
     // Arrange
     var hen = new Animals.hen(14, 15);
