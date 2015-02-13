@@ -4,7 +4,7 @@ Game.animals = [];
 Game.buildings = [];
 
 Game.states = {'IDLE':0, 'BUILDING_CHICKENCOOP':1};
-Game.state = undefined;
+Game.state = Game.states.IDLE;
 
 Game.getPosition = function(target, event) {
   var offset = jQuery(target).offset();
@@ -41,10 +41,12 @@ Game.chickencoop.placeFloor = function(x, y) {
   var floor = new Floors.floor(x, y);
   Floors.appendToDOM(floor);
   Game.chickencoop.selected.floors.push(floor);
+  
+  var chickencoop = Game.chickencoop.selected;
 
   jQuery(Floors.cssSelector(floor)).on('click', function(event) {
     var position = Game.getPosition(jQuery(this).parent(), event);
-    Game.chickencoop.placeHen(position.x, position.y, Game.chickencoop.selected);
+    Game.chickencoop.placeHen(position.x, position.y, chickencoop);
     return false;
   });
 };
