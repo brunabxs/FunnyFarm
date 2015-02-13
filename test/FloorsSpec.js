@@ -193,8 +193,6 @@ describe('isAdjacentTopFloor function', function() {
     // Act
     var result = Floors.isAdjacentTopFloor(floor1, floor2);
 
-    console.log(floor1.position.y - parseInt(floor2.size.height, 10) === floor2.position.y)
-
     // Assert
     expect(result).toBe(true);
   });
