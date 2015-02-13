@@ -1,5 +1,7 @@
 var Animals = Animals || {};
 
+Animals.count = 0;
+
 Animals.cssSelector = function(animal) {
   return '#' + animal.id;
 };
@@ -49,10 +51,10 @@ Animals.walk = function(animal) {
     
     if (Buildings.allowMovement(animal.building, position.y, position.x, width, height)) {
       animal.position.y = position.y;
-      sprite.css('top', position.y + 'px');
+      sprite.css('top', position.y);
       
       animal.position.x = position.x;
-      sprite.css('left', position.x + 'px');
+      sprite.css('left', position.x);
       return;
     }
 
@@ -62,10 +64,10 @@ Animals.walk = function(animal) {
   }
 
   animal.position.y = position.y;
-  sprite.css('top', position.y + 'px');
+  sprite.css('top', position.y);
   
   animal.position.x = position.x;
-  sprite.css('left', position.x + 'px');
+  sprite.css('left', position.x);
 };
 
 Animals.walkSpeed = function(animal) {
@@ -102,6 +104,6 @@ Animals.hen = function(x, y, building) {
   self.walkSpeed = 1;
   self.walkStep = 1;
   self.direction = 4;
-  self.directions = { 4:'up', 3:'right', 1:'bottom', 2:'left' };
+  self.directions = { 4:'up', 3:'right', 1:'down', 2:'left' };
   self.building = building;
 };

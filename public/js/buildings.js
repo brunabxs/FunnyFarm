@@ -28,9 +28,9 @@ Buildings.appendToDOM = function(building) {
     var bottom = 0;
     for (var j = 0; j < floors.length; j++) {
       if (Floors.isAdjacentLeftFloor(floors[i], floors[j])) left++;
-      if (Floors.isAdjacentRightFloor(floors[i], floors[j])) left++;
-      if (Floors.isAdjacentTopFloor(floors[i], floors[j])) left++;
-      if (Floors.isAdjacentBottomFloor(floors[i], floors[j])) left++;
+      if (Floors.isAdjacentRightFloor(floors[i], floors[j])) right++;
+      if (Floors.isAdjacentTopFloor(floors[i], floors[j])) top++;
+      if (Floors.isAdjacentBottomFloor(floors[i], floors[j])) bottom++;
     }
 
     if (top === 0 && right === 0 && bottom === 0 && left === 0 && floors.length > 1)

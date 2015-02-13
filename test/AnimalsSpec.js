@@ -22,7 +22,7 @@ describe('hen object initialization', function() {
     expect(hen.interval).toEqual(undefined);
     expect(hen.walkSpeed).toEqual(1);
     expect(hen.direction).toEqual(4);
-    expect(hen.directions).toEqual({ 4:'up', 3:'right', 1:'bottom', 2:'left' });
+    expect(hen.directions).toEqual({ 4:'up', 3:'right', 1:'down', 2:'left' });
     expect(hen.building).toBeUndefined();
   });
   
