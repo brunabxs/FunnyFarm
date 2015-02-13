@@ -6,15 +6,21 @@ Buildings.appendToDOM = function(building) {
   
   var floors = building.floors;
   for (var i = 0; i < floors.length; i++) {
-    var left   = floors.filter(function(f){ return Floors.isAdjacentLeftFloor(floors[i], f); });
-    var right  = floors.filter(function(f){ return Floors.isAdjacentRightFloor(floors[i], f); });
-    var top    = floors.filter(function(f){ return Floors.isAdjacentTopFloor(floors[i], f); });
-    var bottom = floors.filter(function(f){ return Floors.isAdjacentBottomFloor(floors[i], f); });
+    var top = 0;
+    var right = 0;
+    var left = 0;
+    var bottom = 0;
+    for (var j = 0; j < floors.length; j++) {
+      if (Floors.isAdjacentLeftFloor(floors[i], floors[j])) left++;
+      if (Floors.isAdjacentRightFloor(floors[i], floors[j])) left++;
+      if (Floors.isAdjacentTopFloor(floors[i], floors[j])) left++;
+      if (Floors.isAdjacentBottomFloor(floors[i], floors[j])) left++;
+    }
 
-    if (left.length === 0 && right.length === 0 && top.length === 0 && bottom.length === 0 && floors.length > 1)
+    if (top === 0 && right === 0 && bottom === 0 && left === 0 && floors.length > 1)
       throw new Error('Floors must be adjacent.');
     
-    Floors.applyFence(floors[i], top.length, right.length, bottom.length, left.length);
+    Floors.applyFence(floors[i], top, right, bottom, left);
   }
   return building;
 };
