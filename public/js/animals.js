@@ -82,7 +82,7 @@ Animals.createSprite = function(animal) {
     no_of_frames: animal.frames
   });
 
-  self.interval = setInterval(function(){ Animals.walk(animal); }, Animals.walkSpeed(animal));
+  animal.interval = setInterval(function(){ Animals.walk(animal); }, Animals.walkSpeed(animal));
 };
 
 Animals.destroySprite = function(animal) {
