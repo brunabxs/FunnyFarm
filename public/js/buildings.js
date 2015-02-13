@@ -1,5 +1,21 @@
 var Buildings = Buildings || {};
 
+Buildings.allowMovement = function(building, top, left, width, height) {
+  var topLeft = building.floors.filter(function(floor) { if (Floors.containsCoord(floor, left, top)) return floor; });
+  if (topLeft.length === 0) return false;
+  
+  var topRight = building.floors.filter(function(floor) { if (Floors.containsCoord(floor, left+width, top)) return floor; });
+  if (topRight.length === 0) return false;
+  
+  var bottomLeft = building.floors.filter(function(floor) { if (Floors.containsCoord(floor, left, top+height)) return floor; });
+  if (bottomLeft.length === 0) return false;
+  
+  var bottomRight = building.floors.filter(function(floor) { if (Floors.containsCoord(floor, left+width, top+height)) return floor; });
+  if (bottomRight.length === 0) return false;
+  
+  return true;
+};
+
 Buildings.appendToDOM = function(building) {
   if (building.minFloors && building.floors.length < building.minFloors)
     throw new Error('Need to place at least ' + building.minFloors + ' adjacent floors.');

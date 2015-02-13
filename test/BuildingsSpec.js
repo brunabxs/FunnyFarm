@@ -53,3 +53,35 @@ describe('appendToDOM function', function() {
     expect(Floors.applyFence.calls.count()).toEqual(4);
   });
 });
+
+describe('allowMovement function', function() {
+  it('must return true if each vertex of a square is inside a building floor', function() {
+    // Arrange
+    var chickencoop = new Buildings.chickencoop();
+    chickencoop.floors.push(new Floors.floor(0, 0));
+    chickencoop.floors.push(new Floors.floor(64, 0));
+    chickencoop.floors.push(new Floors.floor(0, 64));
+    chickencoop.floors.push(new Floors.floor(64, 64));
+
+    // Act
+    var result = Buildings.allowMovement(chickencoop, 32, 32, 32, 32);
+
+    // Assert
+    expect(result).toBe(true);
+  });
+  
+  it('must return false if at least one vertex of a square is not inside a building floor', function() {
+    // Arrange
+    var chickencoop = new Buildings.chickencoop();
+    chickencoop.floors.push(new Floors.floor(0, 0));
+    chickencoop.floors.push(new Floors.floor(64, 0));
+    chickencoop.floors.push(new Floors.floor(0, 64));
+    chickencoop.floors.push(new Floors.floor(64, 64));
+
+    // Act
+    var result = Buildings.allowMovement(chickencoop, 32, 32, 128, 128);
+
+    // Assert
+    expect(result).toBe(false);
+  });
+});
