@@ -15,16 +15,78 @@ body {
 }
 
 #game-menu {
-  float: left;
-  width: 15%;
-  height: 100%;
-  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
+#game-menu section {
+  position: absolute;
+  /*width: 144px;*/
+  height: 32px;
+  padding: 4px 0px;
+  background-color: #f3f3f3;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#game-menu a,
+#game-menu a:last-child span {
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 32px;
+}
+
+/* width: 24 + 2*8+ 2*4 = 48  --  height: 24 + 2*0+ 2*4 = 32 */
+#game-menu a {
+  float: left;
+  width: 24px;
+  height: 24px;
+  margin: 0 8px;
+  padding: 4px;
+  /*box-shadow: inset 1px 1px 10px rgba(255, 255, 255, 0.5);*/
+}
+
+/* width: 24 + 2*4+ 2*4 = 40  --  height: 24 + 2*0+ 2*4 = 32 */
+#game-menu a:last-child span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 4px;
+  padding: 4px;
+  /*box-shadow: inset 1px 1px 10px rgba(255, 255, 255, 0.5);*/
+}
+
+/* width: 40 + 2*0+ 2*4 = 48  --  height: 32 + 2*0+ 2*4 = 40 */
+#game-menu a:last-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 32px;
+  margin: 0;
+  padding: 4px;
+  border-radius: 3px 10px 10px 3px;
+  /*box-shadow: inset 1px 1px 10px rgba(255, 255, 255, 0.5);*/
+}
+
+#game-menu-construction {
+  top: 10;
+  left: 0;
+  width: 64px;
+}
+
+#game-menu-construction-chickencoop  { background-image: url('../img/menu/chickencoop.png'); background-color: #c8b3b3; }
+#game-menu-construction-endchickencoop  { background-image: url('../img/menu/endchickencoop.png'); background-color: #c8b3b3; }
+#game-menu-construction-handler span { background-image: url('../img/menu/construction.png'); background-color: #666; }
+#game-menu-construction-handler          { background-image: url('../img/menu/construction.png'); background-color: #ccc; }
+
+
 #game-background {
-  float: right;
   position: relative;
-  width: 85%;
+  width: 100%;
   height: 100%;
   background-image: url('../img/grass.png');
 }
