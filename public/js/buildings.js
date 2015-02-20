@@ -38,12 +38,15 @@ Buildings.appendToDOM = function(building) {
     
     Floors.applyFence(floors[i], top, right, bottom, left);
   }
+
+  building.finished = true;
   return building;
 };
 
 Buildings.chickencoop = function() {
   var self = this;
 
+  self.finished = false;
   self.minFloors = 4;
   self.floors = [];
 };

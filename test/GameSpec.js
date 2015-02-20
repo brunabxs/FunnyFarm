@@ -78,6 +78,17 @@ describe('GameSpec', function() {
       expect(Game.chickencoop.selected).toBeUndefined();
     });
 
+    it('must set Game.chickencoop.selected finished attribute to true', function() {
+      // Arrange
+      var chickencoop = Game.chickencoop.selected;
+
+      // Act
+      Game.chickencoop.endBuild();
+
+      // Assert
+      expect(chickencoop.finished).toBe(true);
+    });
+
     it('must call Buildings.appendToDOM with Game.chickencoop.selected', function() {
       // Arrange
       var chickencoop = Game.chickencoop.selected;
@@ -159,6 +170,7 @@ describe('GameSpec', function() {
       var x = 0;
       var y = 0;
       var chickencoop = {};
+      chickencoop.finished = true;
 
       // Act
       Game.chickencoop.placeHen(x, y, chickencoop);
@@ -173,6 +185,7 @@ describe('GameSpec', function() {
       var x = 0;
       var y = 0;
       var chickencoop = {};
+      chickencoop.finished = true;
 
       // Act
       Game.chickencoop.placeHen(x, y, chickencoop);
@@ -180,6 +193,19 @@ describe('GameSpec', function() {
       // Assert
       expect(Animals.createSprite).toHaveBeenCalled();
       expect(Animals.createSprite.calls.count()).toBe(1);
+    });
+
+    it('must throw error if chickencoop is defined and is not finished', function() {
+      // Arrange
+      var x = 0;
+      var y = 0;
+      var chickencoop = {};
+      chickencoop.finished = false;
+
+      // Act
+
+      // Assert
+      expect(function(){ Game.chickencoop.placeHen(x, y, chickencoop); }).toThrow(new Error('Finish chickencoop first'));
     });
   });
 });

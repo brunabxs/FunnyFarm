@@ -7,6 +7,7 @@ describe('BuildingsSpec', function() {
       var chickencoop = new Buildings.chickencoop();
 
       // Assert
+      expect(chickencoop.finished).toBe(false);
       expect(chickencoop.minFloors).toBe(4);
       expect(chickencoop.floors).toEqual([]);
     });
@@ -52,6 +53,22 @@ describe('BuildingsSpec', function() {
       // Assert
       expect(Floors.applyFence).toHaveBeenCalled();
       expect(Floors.applyFence.calls.count()).toBe(4);
+    });
+
+    it('must set parameter\'s finished attribute to true', function() {
+      // Arrange
+      spyOn(Floors, 'applyFence');
+      var chickencoop = new Buildings.chickencoop();
+      chickencoop.floors.push(new Floors.floor(0, 0));
+      chickencoop.floors.push(new Floors.floor(64, 0));
+      chickencoop.floors.push(new Floors.floor(0, 64));
+      chickencoop.floors.push(new Floors.floor(64, 64));
+
+      // Act
+      Buildings.appendToDOM(chickencoop);
+
+      // Assert
+      expect(chickencoop.finished).toBe(true);
     });
   });
 

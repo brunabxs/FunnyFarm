@@ -30,6 +30,7 @@ Game.chickencoop.endBuild = function() {
 
   Buildings.appendToDOM(Game.chickencoop.selected);
   Game.buildings.push(Game.chickencoop.selected);
+  Game.chickencoop.selected.finished = true;
   Game.chickencoop.selected = undefined;
   Game.state = Game.states.IDLE;
 };
@@ -45,6 +46,9 @@ Game.chickencoop.placeFloor = function(x, y) {
   var chickencoop = Game.chickencoop.selected;
 
   jQuery(Floors.cssSelector(floor)).on('click', function(event) {
+    if (!chickencoop.finished)
+      return false;
+
     var position = Game.getPosition(jQuery(this).parent(), event);
     Game.chickencoop.placeHen(position.x, position.y, chickencoop);
     return false;
@@ -52,6 +56,9 @@ Game.chickencoop.placeFloor = function(x, y) {
 };
 
 Game.chickencoop.placeHen = function(x, y, chickencoop) {
+  if (chickencoop && !chickencoop.finished)
+    throw new Error('Finish chickencoop first');
+
   var hen = new Animals.hen(x, y, chickencoop);
   Animals.createSprite(hen);
   Game.animals.push(hen);
