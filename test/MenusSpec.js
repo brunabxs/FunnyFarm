@@ -18,7 +18,7 @@ describe('MenusSpec', function() {
   describe('cssSelector function', function() {
     it('must return menu css selector based on parameter\'s id attribute', function() {
       // Arrange
-      var name = 'name'
+      var name = 'name';
       var menu = new Menus.menu(name);
 
       // Act
